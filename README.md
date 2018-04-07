@@ -13,9 +13,9 @@ This course discusses the mathematics used in the analysis of data and the model
 
 The course should be useful to those students interested in data sciences and in decisions models who wish to learn the basic mathematical theory used in algorithms and software.
 
-WARNING: This course is intensely hands-on. Grade is all based on computer projects and tries to simulate real life working experience. 
+This course is intensely hands-on. Grade is all based on computer projects and tries to simulate real life working experience. 
 
-Syllabus:
+### Syllabus:
 
 - **Project 1.** (weeks 1-2) Linear Algebra models for Ranking and Learning from Data. 
 Eigenvalues and Singular Value Decompositions, basic graph theory for Network analysis and ranking. Modeling who is top-ranked. Finding key word Pagerank algorithm and markov chains: How does Google work? HOMEWORK: The recognition of a hand-written digit or ranking of electoral votes Analysis of text-documents through networks.
