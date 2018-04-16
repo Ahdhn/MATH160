@@ -9,6 +9,7 @@
 *.dvi
 *.out
 *.o
+*.asv
 blah.txt
 
 
