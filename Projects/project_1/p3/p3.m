@@ -19,6 +19,7 @@ exam_mat = importdata('examscores.dat',',');
 %compute the number of student and exams 
 [num_student, num_exams] = size(exam_mat); 
 
+
 %%%%%%%%%%%%%%% Massey Method
 %get massey matrix (last row is all-ones)
 massey_mat = (-num_student).*ones(num_exams);
@@ -90,11 +91,14 @@ b = zeros(num_exams,1);
 for id_i = 1:num_exams
     b(id_i) = 1.0 + ((win(id_i)-loss(id_i))/2.0);
 end  
-
 C = colley_mat\b;
 display_rating(2,C);
 
 
+%%%%%%%%%%%%%%% SVD
+[U,S,V] = svd(exam_mat,0);
+approx = U(:,1)*V(1,:);%rank one approximation of exam_mat
+display_rating(3,approx(1,:));
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,21 +107,20 @@ function display_rating(method, rating_vect)
     %first sort the rating from hardest to easiest
     [sorted_y, sorting_id] = sort(rating_vect);
     if method ==1
-        disp(['Using Massey network method, below is the questions', char(10),...
+        disp(['Using "Massey" network method, below is the questions', char(10),...
         '   sorted from most difficult to easier (with rating): ']);        
-    else
-        disp(['Using Colley method, below is the questions', char(10),...
+    elseif method == 2
+        disp(['Using "Colley" method, below is the questions', char(10),...
+        '   sorted from most difficult to easier (with rating): ']);
+    elseif method == 3
+        disp(['Using "SVD" method, below is the questions', char(10),...
         '   sorted from most difficult to easier (with rating): ']);
     end
     
     num_exams = length(rating_vect);
     
-    for k=1:num_exams
-        for l=1:num_exams
-            if sorting_id(l)== k
-                break;
-            end
-        end
+    for k=1:num_exams        
+        l = sorting_id(k);
         disp([' Q. ',num2str(l) , ' (',num2str(rating_vect(l)) ,')' ]);
     end
 end
