@@ -53,10 +53,10 @@ end
 alpha = 0.85;
 A = (1-alpha)*(1/length(A)) + alpha*A ;
 
-[eig_vects, eig_val] = eig(A);
-
+%[eig_vects, eig_val] = eig(A);
 %first eig_vects gives you the rating 
 %display_rating(real(eig_vects(:,1))./norm(real(eig_vects(:,1)),1));
+
 r = rand(length(A),1);
 while true
     q = A*r;
@@ -95,7 +95,8 @@ function display_rating(rating_vect)
     
     %first sort the rating from hardest to easiest
     [sorted_y, sorting_id] = sort(rating_vect);    
-    disp(['Using Page Rank method, ranking of candidates starting with highest (with rating): ']); 
+    disp(['Using Page Rank method, below is ranking of candidates', char(10),...
+        '       starting with the highest (with rating): ']); 
     
     len = length(rating_vect);
     
