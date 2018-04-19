@@ -1,5 +1,6 @@
 \section*{Problem No.4} \label{sec:prob4}
-Figure \ref{fig:fig4_ab} shows the image along with the distrubtion of its singular value 
+Figure \ref{fig:fig4_ab} shows the image along with the distribution of its singular value. The distribution shows a single spike which rapidly smooth out. We think this is due to the greater intensity along the nose of the \emph{mandrill}. 
+
 \begin{figure}[tbh]
 \centering        
    \subfloat [\emph{mandrill} image] {\includegraphics[width=0.5\textwidth]{p4/p4_a.jpg}}
@@ -8,6 +9,11 @@ Figure \ref{fig:fig4_ab} shows the image along with the distrubtion of its singu
    \label{fig:fig4_ab}
 \end{figure}
 
+
+Figure \ref{fig:fig4_c} shows approximation of the image using rank \emph{k} approximation based on SVD. As the rank increases, more details appears as we are extracting more details using the largest singular value then the second largest and so on. 
+
+Figure \ref{tab:error} shows the relative and absolute error of the rank \emph{k} approximation. As it was suggest from Figure \ref{fig:fig4_c}, increasing the rank reduces the error. While increasing the rank from 1 to 6 decreased the error by third, moving to higher ranks does not scale the same which suggests (at least for this example) that using fewer columns of SVD can approximate the image well. 
+ 
 \begin{figure}[tbh]
 \centering        
    \subfloat {\includegraphics[width=0.95\textwidth]{p4/p4_c.jpg}}
