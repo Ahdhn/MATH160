@@ -1,12 +1,31 @@
 \section*{Problem No.3} \label{sec:prob3}
 
-\textbf{(i)} Theory of Singular value decomposition allows us to decompose the matrix G as a sum of many rank-one matrices. Rank of a matrix is defined as the maximum number of linearly independent column vectors. Using this fact, we can give a ranking because there's only one linearly independent column vector which implies that it will scale the values of the difficulty score the students gave for each questions. Thus, The lowest value of the rating will be the most difficult.
-\\
-\\
+%\textbf{(i)} Theory of Singular value decomposition allows us to decompose the matrix G as a sum of many rank-one matrices. Rank of a matrix is defined as the maximum number of linearly independent column vectors. Using this fact, we can give a ranking because there's only one linearly independent column vector which implies that it will scale the values of the difficulty score the students gave for each questions. Thus, The lowest value of the rating will be the most difficult.
+\textbf{(i)} Using SVD, we can approximate the matrix $G$ by a rank-one matrix. A rank-one matrix consists of a set of linearly \emph{dependent} columns. Using the column associated with largest singular value i.e., $u_{1}$ from the left singular vectors and $v_{1}$ from the right singular vectors and approximate $G$ as $u_{1}v_{1}^{T}$, the result is an approximation that captures the important feature of what $G$ represents i.e., the questions difficulty (or easiness since large number means students can answer this question with ease). Since the approximation matrix is rank-one, that means by picking any column, we get a rough idea about the difficulty of the question such that the entry in the column associated with higher value represents the easiest question and second largest represents second easiest question and so on. 
+
 \textbf{(ii)} 
-Massey least square method calculates the sum of score differential between two teams in this case two questions. It output the ratings/difficulty of each question by approximately solving the system of linear equality (the score difference) between all of the questions. The output with the greatest value would be the would be considered easiest. 
-\\
-\\
-\textbf{(iii)} The Result
-\\
-The rating of the difficulty of each equation in the test using SVD method, Massey's network method and Colley's method showed similar but not exact ranking system of the difficulty of the questions. The values were different but the rankings were the same between the results from Colley's method and Massey's method. Furthermore, all three methods ranked question 7 as the hardest, question 5 as third easiest and question 1 as the easiest question. The placement for 2nd, 4th, 5th and 6th easiest questions were different in result from SVD compared to Massey's. Massey had the greatest range of the scores.
+Using the score differentials means 
+%Massey least square method calculates the sum of score differential between two teams in this case two questions. It output the ratings/difficulty of each question by approximately solving the system of linear equality (the score difference) between all of the questions. The output with the greatest value would be the would be considered easiest. 
+
+
+
+\textbf{(iii)} 
+Shown below the score or rating using the three methods. We can see that all methods are consistent about what is the hardest question which give us results with confidence. Where Massey's and Colley's agree in their ratings, SVD method deviates for subsequent questions. This could be due to the fact that SVD does not use all the information of the matrix as it approximate it and give rough estimate based on this approximation. 
+%The rating of the difficulty of each equation in the test using SVD method, Massey's network method and Colley's method showed similar but not exact ranking system of the difficulty of the questions. The values were different but the rankings were the same between the results from Colley's method and Massey's method. Furthermore, all three methods ranked question 7 as the hardest, question 5 as third easiest and question 1 as the easiest question. The placement for 2nd, 4th, 5th and 6th easiest questions were different in result from SVD compared to Massey's. Massey had the greatest range of the scores.
+\begin{figure}[tbh]
+ \centering    
+\begin{tabular}{ |p{4cm}|| p{4cm}|p{4cm}|}
+ \hline
+ SVD & Massey's & Colley's \\ \hhline{|=|=|=|}
+ \hline 
+ Q.7 (-0.1191)   &   Q.7 (-0.81567) &  Q.7 (0.32192) \\      
+ Q.4 (-0.080687) &   Q.2 (-0.71889) &  Q.2 (0.44977) \\
+ Q.2 (-0.056591) &   Q.3 (-0.10599) &  Q.3 (0.4726)  \\
+ Q.6 (0.052502)  &   Q.4 (0.087558) &  Q.4 (0.50913) \\
+ Q.5 (0.054354)  &   Q.5 (0.34562)  &  Q.5 (0.54338) \\
+ Q.3 (0.084453)  &   Q.6 (0.57143)  &  Q.6 (0.57306) \\
+ Q.1 (0.092386)  &   Q.1 (0.63594)  &  Q.1 (0.63014) \\
+ \hline
+\end{tabular} 
+\caption{Ranking of the questions using SVD, Massey's network and Colley's method starting from the most difficult to easiest. The score or rating given by each method is shown between parenthesis for each question.}
+\end{figure}

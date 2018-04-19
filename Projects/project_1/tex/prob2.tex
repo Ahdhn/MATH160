@@ -8,3 +8,40 @@ Using the plurality vote method, we rank each candidate by the amount of first p
 \noindent Using the W-Borda count method, we rank each candidate just like how we do in the Borda count method. However, the assigned points are given by a vector W, where $w_1 \geq w_2 \geq ... \geq w_n$, with $w_1$ being the points assigned to the candidate in first place and $w_n$ to the candidate in last place. Using the W vector values $[10\hspace{1mm} 4\hspace{1mm} 3\hspace{1mm} 2\hspace{1mm} 1]^T$ we can see that Bernie Sanders wins the election with a score of $1378$ and Hilary Clinton with a score of $1351$. However, if we change the W vector values to $10\hspace{1mm} 9\hspace{1mm} 3\hspace{1mm} 2\hspace{1mm} 1]^T$, Hilary Clinton wins the election with a score of $1811$ and Bernie Sanders having a score of $1653$. If we change the W vector values to $[0\hspace{1mm} 0\hspace{1mm} 0\hspace{1mm} 0\hspace{1mm} 0]^T$ we will get a five way tie.\vspace{1pc}
 
 \noindent Using the Pagerank algorithm, we rank each candidate by looking at each voter's 
+
+\begin{figure}[tbh]
+ \centering    
+\begin{tabular}{ |p{2cm}|p{2.5cm}|p{3cm}|p{2cm}|p{2.5cm}|p{2.5cm}|}
+ \hline
+  Plurality & Average &  Borda & W-Borda1 & W-Borda2 & Page Rank \\ \hhline{|=|=|=|=|=|=|}
+ \hline
+   BS (96) & HC (3.8583) & HC (686) & HC (926) & BS (148.05) & HC (0.24981) \\
+   HC (85) & BS (3.7417) & BS (658) & BS (898) & HC (147.9)  & BS (0.246)   \\
+   DT (44) & DT (2.6958) & DT (407) & DT (647) & DT (101.15) & DT (0.19265) \\
+   TC (8)  & JK (2.5375) & JK (369) & JK (609) & JK (78.1167)& JK (0.16525) \\
+   JK (7 ) & TC (2.1667) & TC (280) & TC (520) & TC (72.7833)& TC (0.14629) \\ 
+ \hline
+\end{tabular}
+\caption{Ranking of the candidates using different methods along with the each method rating between parenthesis. W-Borda1 corresponds to the weight vector of $[5\ 4\ 3\ 2\ 1]$ while $W-Borda2$ is for weight vector  $[1\ \frac{1}{2}\ \frac{1}{3}\ \frac{1}{4}\ \frac{1}{5}]$.} 
+\end{figure} 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
