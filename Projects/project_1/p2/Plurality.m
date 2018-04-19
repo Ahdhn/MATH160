@@ -1,3 +1,20 @@
+clc;
+clear;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%get the file content as in cell structure
+fid = fopen("rankingcandidates.dat");
+file_content = textscan(fid,'%s %s %s %s %s','Delimiter',',');
+%convert file content to string array 
+col_len = length(file_content);
+%initialze the string array
+first_col = string(cell2mat(file_content{1}));
+rankingcandidates = first_col;
+%concatenate the rest of columns 
+for n=2:col_len
+   rankingcandidates = horzcat(rankingcandidates, string(cell2mat(file_content{n})));
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 DT = count(rankingcandidates(:,1), "DT");
 a = sum(DT,1);
 fprintf('Donald Trump has %d votes.\n',a) 
