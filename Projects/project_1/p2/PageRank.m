@@ -49,31 +49,26 @@ for n =1:col_len
     A(:,n) = A(:,n)./sum(A(:,n));
 end
 
+%compute modified A
+alpha = 0.85;
+A = (1-alpha)*(1/length(A)) + alpha*A ;
 
-%{
-%Code for finding A, up to the 5x5 matrix of the sums of all 240 matrices
-sum_of_matrices = [1 2 3; 4 5 6; 7 8 9];
-%Column sum in the form of 1x5 matrix.
-s = sum(sum_of_matrices)
-%Gives A matrix
-for n = 1:3
-    A(:,n) = sum_of_matrices(:,n)/s(1,n)
-end
-%Equation for A_tilde, alpha = .85
-A_tilde = A*.85+(.15/3)*ones(3,3)
+[eig_vects, eig_val] = eig(A);
 
-%Random r
-r = randperm(999,3)'
-
-%Power Method
-for k = 1:999
-    q_k = A_tilde*r^(k-1)
-    r_k = q_k/norm(q_k,1)
-    if abs(r_k_minus - r_k) < 0.001
+%first eig_vects gives you the rating 
+%display_rating(real(eig_vects(:,1))./norm(real(eig_vects(:,1)),1));
+r = rand(length(A),1);
+while true
+    q = A*r;
+    temp_r = r;
+    r = q./norm(q,1);
+    %stopping criterion based on 1-norm 
+    if abs(norm(r-temp_r,1)) < eps
         break;
-    end
+    end    
 end
-%}
+display_rating(r);
+
 function num = getNum(candidate_string)
     %convert the candidate name to number
     %1 = HC
@@ -95,4 +90,39 @@ function num = getNum(candidate_string)
         warning('Invalid input to getNum()');
     end
 end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function display_rating(rating_vect)
     
+    %first sort the rating from hardest to easiest
+    [sorted_y, sorting_id] = sort(rating_vect);    
+    disp(['Using Page Rank method, ranking of candidates starting with highest (with rating): ']); 
+    
+    len = length(rating_vect);
+    
+    for k= len:-1:1
+        l = sorting_id(k);
+        disp([getCandidateName(l) , num2str(rating_vect(l))]);
+    end
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function candidate_string = getCandidateName(candidate_num)
+    %convert the candidate number to name 
+    %1 = HC
+    %2 = BS
+    %3 = JK
+    %4 = TC
+    %5 = DT
+    if candidate_num == 1
+        candidate_string = "HC";
+    elseif candidate_num == 2
+        candidate_string = "BS";
+    elseif candidate_num == 3
+        candidate_string = "JK";
+    elseif candidate_num == 4
+        candidate_string = "TC";
+    elseif candidate_num == 5
+        candidate_string = "DT";
+    else
+        warning('Invalid input to getNum()');
+    end
+end
