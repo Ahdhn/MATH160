@@ -4,8 +4,10 @@ clear;
 for FILE=1:3
    %read files 
     solArray = dlmread(['sudo',num2str(FILE),'_sol.txt'],'#',0,1);
+    %solArray = dlmread(['sudoOnlyOne2_sol.txt'],'#',0,1);
     [rowSol,colSol] = size(solArray);
     inputArray = dlmread(['sudo',num2str(FILE),'.txt']);
+    %inputArray = dlmread(['sudoOnlyOne.txt']);
     [rowInput,colInput] = size(inputArray);
     
     
@@ -48,6 +50,7 @@ for FILE=1:3
     axis equal;
     axis off;
     title(['Solution of SUDOKU Number ', num2str(FILE)]);
+    %title(['Solution of SUDOKU only one']);
     
 
 end

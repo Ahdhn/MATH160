@@ -77,29 +77,19 @@ function gCourse = constructGraph(fileName, coursesArray_str)
     %MAT21BH
     gCourse = addedge(gCourse, 'MAT21A','MAT21BH',1.0/2.0);
     gCourse = addedge(gCourse,'MAT21AH','MAT21BH',1.0/2.0);
-    
-    %MAT167
-    gCourse = addedge(gCourse, 'MAT67','MAT167',1.0/2.0);
-    gCourse = addedge(gCourse,'MAT22A','MAT167',1.0/2.0);
-    
-    %MAT22B
-    gCourse = addedge(gCourse,'MAT67','MAT22B',1.0/2.0);
-    gCourse = addedge(gCourse,'MAT22A','MAT22B',1.0/2.0);
-        
-    %MAT111
-    gCourse = addedge(gCourse,'MAT25','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT127A','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT67','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT108','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT114','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT115A','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT141','MAT111',1.0/8.0);
-    gCourse = addedge(gCourse,'MAT145','MAT111',1.0/8.0);
-    
+         
+       
     %new node MAT22A | MAT 67
     gCourse = addnode(gCourse, 'MAT22A|MAT67');
     gCourse = addedge(gCourse,'MAT22A','MAT22A|MAT67',1.0/2.0);
     gCourse = addedge(gCourse,'MAT67','MAT22A|MAT67',1.0/2.0);
+    
+    %MAT167
+    gCourse = addedge(gCourse, 'MAT22A|MAT67','MAT167',1.0);
+        
+    %MAT22B
+    gCourse = addedge(gCourse,'MAT22A|MAT67','MAT22B',1.0);
+    
     
     %MAT114
     gCourse = addedge(gCourse,'MAT22A|MAT67','MAT114',1.0);
@@ -216,4 +206,10 @@ function gCourse = constructGraph(fileName, coursesArray_str)
     %MAT165 
     gCourse = addedge(gCourse,'MAT22A|MAT67','MAT165',1.0);
     gCourse = addedge(gCourse, 'MAT25|MAT108|MAT114|MAT115A|MAT145', 'MAT165',1.0);
+    
+    %MAT111   
+    gCourse = addedge(gCourse,'MAT25|MAT108|MAT114|MAT115A|MAT145','MAT111',1.0/8.0);
+    gCourse = addedge(gCourse,'MAT127A','MAT111',1.0/8.0);
+    gCourse = addedge(gCourse,'MAT67','MAT111',1.0/8.0);
+    gCourse = addedge(gCourse,'MAT141','MAT111',1.0/8.0);    
 end

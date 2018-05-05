@@ -42,7 +42,7 @@ for i=1:numCourses
         edge = findedge(gCourse,pre(j),courseName);
         if gCourse.Edges.Weight(edge) == 1 
             %means that course pre(j) must be taken before course i            
-            %disp([num2str(i),'  ',num2str(findnode(gCourse,pre(j)))]);
+            disp([num2str(i),'  ',num2str(findnode(gCourse,pre(j)))]);
             %disp([courseName,'  ',pre(j)]);
         end
     end    

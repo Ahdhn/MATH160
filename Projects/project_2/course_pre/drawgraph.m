@@ -11,7 +11,7 @@ function [graph] = drawgraph( m_digraph )
     graph.EdgeType = 'straight';
     graph.NodeAutoSize = 'on';    
     graph.EdgeType = 'curved';
-    graph.ShowWeights = 'on';
+    graph.ShowWeights = 'off';
     nodes = get(graph, 'Nodes');
     
     
@@ -27,7 +27,12 @@ function [graph] = drawgraph( m_digraph )
 
     edges = get(graph, 'Edges');
     for i = 1:length(edges)
-        edges(i).LineColor = [0 0 0];
+        if edges(i).Weight == 1
+            edges(i).LineColor = [0 0 0];
+        else
+            edges(i).LineColor = [0 0 1];
+        end
+        
     end
     view(graph);
 end
