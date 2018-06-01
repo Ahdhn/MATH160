@@ -1,0 +1,4 @@
+http://www.ece.drexel.edu/gailr/ECE-S690-503/class5.ppt.pdf
+http://www.biosym.uzh.ch/modules/models/DNA_Alignment/align.xhtml
+https://ub.cbm.uam.es/publications/teaching/master_biofisica_2011_2012/needleman-wunsch_eng.pdf
+https://www.cs.sjsu.edu/~aid/cs152/NeedlemanWunsch.pdf
