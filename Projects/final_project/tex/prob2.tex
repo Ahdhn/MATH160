@@ -1,4 +1,64 @@
 \section*{Problem No.2} \label{sec:prob2}
+
+
+
 \paragraph{Part A:}
+\begin{Huge}
+TO DO
+\end{Huge}
+\paragraph{Part B:}
+To solve the LP problem, we used \texttt{cvx}; MATLAB-based modeling system for convex optimization. \texttt{cvx} makes it easy to write and code the problem as a mathematical equations without much conversion compared with using \texttt{linprog} within MATLAB Optimization toolbox. 
+
+The optimal value we get was \textbf{0.49375}. The value represents the average absolute error of the linear model using the provided data set. Since the score (or labels) varies from 0 to 10, the values 0.49375 looks acceptable compared with the range of the scores.
+
+The following shows the parameters of the model
+\begin{footnotesize}
+$$
+a= \text{[}\quad 0.083682\qquad -0.84129\qquad -0.23035\qquad 0.061643\qquad -1.608 \quad \cdots\cdots
+$$
+
+$$
+\qquad \qquad \qquad \cdots \quad 0.0018835\qquad -0.0027255\qquad -61.517\qquad -0.041654\qquad 1.0888\qquad 0.29696 \text{]}
+$$
+$$
+b = 63.1391
+$$
+\end{footnotesize}
 
 
+\paragraph{Part C:}
+We used \texttt{cvx} to solve the least-squares regression problem by replacing the 1-norm by 2-norm. The model we get is as follows 
+\begin{footnotesize}
+$$
+a= \text{[}\quad 0.025086 \qquad -1.0835 \qquad -0.18256 \qquad 0.016374 \qquad -1.8741\quad \cdots\cdots
+$$
+
+$$
+\qquad \qquad  \cdots \quad 0.0043605 \qquad -0.0032643 \qquad -17.9835 \qquad -0.41315 \qquad 0.91647 \qquad 0.2761  \text{]}
+$$
+$$
+b = 22.0655
+$$
+\end{footnotesize}
+The residual sum of squared errors (RSS) is \textbf{666.4107}. Note that  RSS = $\sum_{i=1}^{n}(y_{i}-a^{T}x_{i}-b)^{2}$.  %Note that in computing RSS, we did not divide by $n$ (number of data points) however the objective function that we used for minimization divides the RSS by $n$ i.e., $min\ \frac{1}{n} \sqrt{\sum_{i=1}^{n}(y_{i}-a^{T}x_{i}-b)^{2}}$.
+
+\paragraph{Part D:}
+Here we implemented the LASSO model by adding a regularization term to the least-squares regression model. The regularization is $\lambda |q|_{1}$ where $q\in \mathbb{R}^12 = [a;b]$ (i.e., extends the $a$ vector to contain $b$ as well). We experimented with few values for $\lambda$ in order to reach a value that will turn most of the elements of $q$ to zero except four of them; those that determines the quality of wine. With $\lambda = 0.2$, we found the four features are the top four: \emph{volatile acidity}, \emph{sulphates}, \emph{pH}, and \emph{alcohol}. Our model is as follows 
+
+
+\begin{footnotesize}
+$$
+a= \text{[}\quad 0.063692  \qquad  -0.92564 \qquad -5.3119\times 10^{-5}  \qquad   1.2099\times 10^{-5} \qquad -8.1434 \times 10^{-6} \quad  \cdots\cdots
+$$
+
+$$
+\qquad \qquad  \cdots \quad 0.0044334    \qquad -0.0024063 \qquad   0.00044866       \qquad  0.38007 \qquad    0.66368 \qquad  0.32965 \text{]}
+$$
+$$
+b = 0.5012
+$$
+\end{footnotesize}
+
+
+
+\textbf{Note:} In order to run the code, \texttt{cvx} should be installed on your machine. 
