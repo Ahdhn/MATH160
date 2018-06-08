@@ -2,15 +2,22 @@
 clear;
 close all;
 global myGraph;
-edgeList = dlmread('facebookgraph.txt',' ');
+edgeList = dlmread('test.txt',' ');
 %increment all edges by 1 as matlab does not recognize 0 indexing 
-K = 1;
+global K
+K=1;
 edgeList = 1+edgeList;
 sizeList = length(edgeList);
 myGraph = graph(edgeList(:,1),edgeList(:,2),ones(sizeList,1));
 
-Aeq = ones(myGraph.numnodes,1)';
-X = ga(@myObjFun, myGraph.numnodes, [],[], Aeq, K,0,1, [],1);
+A = ones(myGraph.numnodes,1)';
+X = ga(@myObjFun,... %obj func to `minimize` (- our original obj func)
+    myGraph.numnodes,... %number of vraibles 
+    [], [],... %linear inequality constraints 
+    [],[],... %linear equality constraints 
+    0,1,... %lower and upper bounds
+    @mycon,...
+    1:myGraph.numnodes);%variables that are integer (all of them)
 
 
 function obj = myObjFun(X)
@@ -24,4 +31,10 @@ function obj = myObjFun(X)
         end        
     end
     obj =-obj;
+end
+
+function [c,ceq] = mycon(x)
+    global K;
+    c = norm(x,1)-K;
+    ceq = [];%because of the integer constraints
 end
