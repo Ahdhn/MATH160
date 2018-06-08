@@ -3,9 +3,89 @@
 
 
 \paragraph{Part A:}
-\begin{Huge}
-TO DO
-\end{Huge}
+Here we explain in details who to derive the matrix-form formulation. We have $n$ date points, for each, we have $x_{i} \in \mathbb{R}^{11}$ features and $y_{i}\in \mathbb{R}$ label. The optimization problem is to find $a$  and $b$ such that 
+\[
+\argmin_{a\in \mathbb{R}^{11}, b\in \mathbb{R}} \frac{1}{n} \sum_{i=1}^{n}|a^{T}x_{i}+b - y_{i}|
+\]
+
+We define $\omega \in \mathbb{R}^{12}$ as concatenation (in MATLAB language) of $b$ on top of $a$. Similarly, we define  $\tilde{x} \in \mathbb{R}^{12}$  by concatenating 1 on top of $x$ as follows
+\[
+\omega \in \mathbb{R}^{12} =
+\left[
+\begin{array}{c}
+b \\
+a_{1} \\
+a_{2} \\
+...\\
+...\\
+a_{10} \\
+a_{11} \\
+\end{array} 
+\right]
+\qquad \qquad
+\tilde{x} \in \mathbb{R}^{12} =
+\left[
+\begin{array}{c}
+1 \\
+x_{1} \\
+x_{2} \\
+...\\
+...\\
+x_{10} \\
+x_{11} \\
+\end{array} 
+\right]
+\]
+
+We can use $\omega$ and $\tilde{x}$ to redefine the optimization as follows
+\[
+\argmin_{w\in \mathbb{R}^{12}} \frac{1}{n} \sum_{i=1}^{n}|w^{T}\tilde{x}_{i} - y_{i}|
+\]
+
+This can be written in matrix form by defining the matrix $X\in \mathbb{R}^{13 \times n}$ and vector $W \in \mathbb{R}^{13}$ as follows (superscript emphasizes different data points)
+
+\[
+X\in \mathbb{R}^{13 \times n} = 
+\left[
+\begin{array}{cc ccc c}
+\tilde{x}_{0}^{1} =1 &  \tilde{x}_{0}^{2} =1 & \cdots & \cdots & \cdots &  \tilde{x}_{0}^{n} =1\\
+\tilde{x}_{1}^{1} = x_{1}^{1} & \tilde{x}_{1}^{2} = x_{1}^{2} & \cdots & \cdots & \cdots & \tilde{x}_{1}^{n} = x_{1}^{n}\\
+\tilde{x}_{2}^{1} = x_{2}^{1} & \tilde{x}_{2}^{2} = x_{2}^{2} & \cdots & \cdots & \cdots & \tilde{x}_{2}^{n} = x_{2}^{n}\\
+\cdots & \cdots & \cdots & \cdots & \cdots & \cdots\\
+\cdots & \cdots & \cdots & \cdots & \cdots & \cdots\\
+\tilde{x}_{11}^{1} = x_{11}^{1} & \tilde{x}_{11}^{2} = x_{11}^{2} & \cdots & \cdots & \cdots & \tilde{x}_{11}^{n} = x_{11}^{n}\\
+-y^{1} & -y^{2} & \cdots & \cdots & \cdots & -y^{n}\\
+\end{array} 
+\right],
+W \in \mathbb{R}^{13} =
+\left[
+\begin{array}{c}
+b \\
+a_{1} \\
+a_{2} \\
+...\\
+...\\
+a_{10} \\
+a_{11} \\
+1
+\end{array} 
+\right]
+\]
+
+Then the optimization problem can be re-written as 
+\[
+\argmin_{W\in \mathbb{R}^{13}} |X^{T}W|
+\]
+
+Minimizing the 1-norm of a vector can be formulated as an Linear Programming (LP) problem as follows
+
+\[
+\begin{array}{cl}
+\text{minimize} &  \mathbf{1}^{T}S\\
+\text{subject to} & X^{T}W 
+\end{array} 
+\]
+
 \paragraph{Part B:}
 To solve the LP problem, we used \texttt{cvx}; MATLAB-based modeling system for convex optimization. \texttt{cvx} makes it easy to write and code the problem as a mathematical equations without much conversion compared with using \texttt{linprog} within MATLAB Optimization toolbox. 
 
