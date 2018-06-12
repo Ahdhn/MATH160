@@ -1,0 +1,2 @@
+username: m160s1-10@[SERVER].math.ucdavis.edu
+[SERVER] = fuzzy,cosine,sine,tangent
