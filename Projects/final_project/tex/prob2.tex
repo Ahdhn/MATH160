@@ -4,9 +4,10 @@
 
 \paragraph{Part A:}
 Here we explain in details who to derive the matrix-form formulation. We have $n$ date points, for each, we have $x_{i} \in \mathbb{R}^{11}$ features and $y_{i}\in \mathbb{R}$ label. The optimization problem is to find $a$  and $b$ such that 
-\[
+
+$$
 \argmin_{a\in \mathbb{R}^{11}, b\in \mathbb{R}} \frac{1}{n} \sum_{i=1}^{n}|a^{T}x_{i}+b - y_{i}|
-\]
+$$
 
 We define $\omega \in \mathbb{R}^{12}$ as concatenation (in MATLAB language) of $b$ on top of $a$. Similarly, we define  $\tilde{x} \in \mathbb{R}^{12}$  by concatenating 1 on top of $x$ as follows
 \[
@@ -44,7 +45,7 @@ We can use $\omega$ and $\tilde{x}$ to redefine the optimization as follows
 
 This can be written in matrix form by defining the matrix $X\in \mathbb{R}^{13 \times n}$ and vector $W \in \mathbb{R}^{13}$ as follows (superscript emphasizes different data points)
 
-\[
+$$
 X\in \mathbb{R}^{13 \times n} = 
 \left[
 \begin{array}{cc ccc c}
@@ -70,7 +71,7 @@ a_{11} \\
 1
 \end{array} 
 \right]
-\]
+$$
 
 Then the optimization problem can be re-written as 
 \[
@@ -82,9 +83,12 @@ Minimizing the 1-norm of a vector can be formulated as an Linear Programming (LP
 \[
 \begin{array}{cl}
 \text{minimize} &  \mathbf{1}^{T}S\\
-\text{subject to} & X^{T}W 
+\text{subject to} & X^{T}W \preceq S \\
+				  & -X^{T}W \preceq S
 \end{array} 
 \]
+where $S\in \mathbb{R}^{n}$. From that, we can define the variables in the question to be: $c = \mathbf{1} \in \mathbb{R}^{1}$, $A = [X -X]^{T} \in \mathbb{R}^{2n\times 13} $, $d = S\in \mathbb{R}^{13}$, and $b = W\in \mathbb{R}^{13}$.
+
 
 \paragraph{Part B:}
 To solve the LP problem, we used \texttt{cvx}; MATLAB-based modeling system for convex optimization. \texttt{cvx} makes it easy to write and code the problem as a mathematical equations without much conversion compared with using \texttt{linprog} within MATLAB Optimization toolbox. 
@@ -93,32 +97,34 @@ The optimal value we get was \textbf{0.49375}. The value represents the average 
 
 The following shows the parameters of the model
 \begin{footnotesize}
-$$
+\mathleft
+\[
 a= \text{[}\quad 0.083682\qquad -0.84129\qquad -0.23035\qquad 0.061643\qquad -1.608 \quad \cdots\cdots
-$$
+\]
 
-$$
+\[
 \qquad \qquad \qquad \cdots \quad 0.0018835\qquad -0.0027255\qquad -61.517\qquad -0.041654\qquad 1.0888\qquad 0.29696 \text{]}
-$$
-$$
+\]
+\[
 b = 63.1391
-$$
+\]
 \end{footnotesize}
 
 
 \paragraph{Part C:}
 We used \texttt{cvx} to solve the least-squares regression problem by replacing the 1-norm by 2-norm. The model we get is as follows 
 \begin{footnotesize}
-$$
+\mathleft
+\[
 a= \text{[}\quad 0.025086 \qquad -1.0835 \qquad -0.18256 \qquad 0.016374 \qquad -1.8741\quad \cdots\cdots
-$$
+\]
 
-$$
+\[
 \qquad \qquad  \cdots \quad 0.0043605 \qquad -0.0032643 \qquad -17.9835 \qquad -0.41315 \qquad 0.91647 \qquad 0.2761  \text{]}
-$$
-$$
+\]
+\[
 b = 22.0655
-$$
+\]
 \end{footnotesize}
 The residual sum of squared errors (RSS) is \textbf{666.4107}. Note that  RSS = $\sum_{i=1}^{n}(y_{i}-a^{T}x_{i}-b)^{2}$.  %Note that in computing RSS, we did not divide by $n$ (number of data points) however the objective function that we used for minimization divides the RSS by $n$ i.e., $min\ \frac{1}{n} \sqrt{\sum_{i=1}^{n}(y_{i}-a^{T}x_{i}-b)^{2}}$.
 
@@ -127,16 +133,17 @@ Here we implemented the LASSO model by adding a regularization term to the least
 
 
 \begin{footnotesize}
-$$
+\mathleft
+\[
 a= \text{[}\quad 0.063692  \qquad  -0.92564 \qquad -5.3119\times 10^{-5}  \qquad   1.2099\times 10^{-5} \qquad -8.1434 \times 10^{-6} \quad  \cdots\cdots
-$$
+\]
 
-$$
+\[
 \qquad \qquad  \cdots \quad 0.0044334    \qquad -0.0024063 \qquad   0.00044866       \qquad  0.38007 \qquad    0.66368 \qquad  0.32965 \text{]}
-$$
-$$
+\]
+\[
 b = 0.5012
-$$
+\]
 \end{footnotesize}
 
 

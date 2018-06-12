@@ -14,13 +14,20 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{wrapfig,lipsum}
-\usepackage{amssymb}
+%\usepackage{amssymb}
 %\usepackage{nath}
 \usepackage{amsfonts}
-\usepackage{float}
+%\usepackage{float}
 \usepackage{hhline}
 
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\makeatletter
+\newcommand{\mathleft}{\@fleqntrue\@mathmargin0pt}
+\newcommand{\mathcenter}{\@fleqnfalse}
+\makeatother
+
 \DeclareMathOperator*{\argmin}{argmin}
+
 
 \newtheorem{lemma}{Lemma}
 \newtheorem{sublemma}{Lemma}[lemma]
@@ -30,7 +37,7 @@
 
 \title{MAT160 - Final Project}
 \author{Ahmed H. Mahmoud}
-\date{June, 11th 2017} 
+\date{June, 12th 2017} 
 
 \maketitle
 
